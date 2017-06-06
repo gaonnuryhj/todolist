@@ -37,6 +37,7 @@ public class TodoController {
 	Collection<Todo> readList() {
 		return service.findAll();
 	}
+	
 
 	@GetMapping("/{id}")
 	Todo read(@PathVariable  Integer id) {
