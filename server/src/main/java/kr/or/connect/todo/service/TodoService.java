@@ -39,6 +39,10 @@ public class TodoService {
 		int affected = dao.deleteById(id);
 		return affected == 1;
 	}
+	public boolean deletebycompleted() {
+		int affected = dao.deleteByCompleted();
+		return affected == 1;
+	}
 	
 	
 }

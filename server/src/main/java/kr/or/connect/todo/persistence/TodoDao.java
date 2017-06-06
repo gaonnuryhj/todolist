@@ -59,8 +59,16 @@ public class TodoDao {
 	public int deleteById(Integer id) {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.update(DELETE_BY_ID, params);
+		
 	}
-
+	
+	
+	static final String DELETE_BY_COMPLETED = "DELETE FROM todo WHERE completed=1";
+	public int deleteByCompleted() {
+		Map<String, Object> params = Collections.emptyMap();
+		return jdbc.update(DELETE_BY_COMPLETED, params);
+	}
+	
 	//// Update
 	private static final String UPDATE = "UPDATE todo SET\n" + "completed = :completed\n" + "WHERE id = :id";
 
@@ -75,5 +83,5 @@ public class TodoDao {
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.query(SELECT_ALL, params, rowMapper);
 	}
-
+	
 }
