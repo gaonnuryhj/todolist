@@ -18,10 +18,21 @@ $(".new-todo").keypress(function(event){
           data: JSON.stringify({'todo':todo}),
           contentType: "application/json; charset=UTF-8",
           success:function(result){
-            $('.All').attr('class','selected');
+            var now_filter=$('.filters > li > a.selected').attr('id');
+            var filter_id;
+            if(now_filter=="All" ){
+              filter_id=0;
+            }
+            else if (now_filter=="Active") {
+              filter_id=2;
+            }
+            else if (now_filter=="Completed") {
+              filter_id=1;
+            }
+          //  $('.All').attr('class','selected');
 
-            $('.todo-list').prepend('<li id="'+result.id+'">'+'<div class="view">'+'<input class="toggle" type="checkbox">'+'<label>'+todo+'</label>'+'<button class="destroy"></button>'+'</div>'+'</li>');
-
+          //  $('.todo-list').prepend('<li id="'+result.id+'">'+'<div class="view">'+'<input class="toggle" type="checkbox">'+'<label>'+todo+'</label>'+'<button class="destroy"></button>'+'</div>'+'</li>');
+            loadList(filter_id);
           },
           error : function(request, status, error ) {
             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
